@@ -7,7 +7,7 @@ from llava.constants import DEFAULT_IMAGE_PATCH_TOKEN, DEFAULT_IM_START_TOKEN, D
 def load_pretrained_model(model_path, model_base, model_name, load_8bit=False, load_4bit=False, device_map="auto", device="cuda"):
 
     kwargs = {}
-
+    # kwargs['device_map'] = 'cpu'
     if device != "cuda":
         kwargs['device_map'] = {"": device}
 
@@ -15,6 +15,7 @@ def load_pretrained_model(model_path, model_base, model_name, load_8bit=False, l
         kwargs['load_in_8bit'] = True
     elif load_4bit:
         kwargs['load_in_4bit'] = True
+        del kwargs["load_in_4bit"]
         kwargs['quantization_config'] = BitsAndBytesConfig(
             load_in_4bit=True,
             bnb_4bit_compute_dtype=torch.float16,

@@ -11,6 +11,10 @@ from transformers.generation.utils import GenerateOutput
 
 from ..llava_arch import LlavaMetaModel, LlavaMetaForCausalLM
 
+from transformers import logging as hf_logging
+
+hf_logging.set_verbosity_info()
+logger = hf_logging.get_logger("transformers")
 
 class LlavaMistralConfig(MistralConfig):
     model_type = "llava_mistral"
@@ -52,7 +56,12 @@ class LlavaMistralForCausalLM(MistralForCausalLM, LlavaMetaForCausalLM):
         images: Optional[torch.FloatTensor] = None,
         image_sizes: Optional[List[List[int]]] = None,
         return_dict: Optional[bool] = None,
+        **kwargs,
     ) -> Union[Tuple, CausalLMOutputWithPast]:
+        
+        if kwargs:
+            logger.warning_once(f"지금 분기문 탓어!!!!!{kwargs}")
+            
 
         if inputs_embeds is None:
             (
