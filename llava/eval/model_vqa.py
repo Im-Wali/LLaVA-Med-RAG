@@ -44,6 +44,7 @@ def eval_model(args):
     ans_file = open(answers_file, "w")
     for line in tqdm(questions):
         idx = line["question_id"]
+        image_path = line["image_path"]
         image_file = line["image"]
         qs = line["text"].replace(DEFAULT_IMAGE_TOKEN, '').strip()
         cur_prompt = qs
@@ -59,7 +60,8 @@ def eval_model(args):
 
         input_ids = tokenizer_image_token(prompt, tokenizer, IMAGE_TOKEN_INDEX, return_tensors='pt').unsqueeze(0).cuda()
 
-        image = Image.open(os.path.join(args.image_folder, image_file))
+        # 이미지 폴더 위치 변경 : TODO
+        image = Image.open(os.path.join(args.image_folder + "/" + image_path, image_file)) 
         image_tensor = process_images([image], image_processor, model.config)[0]
 
         stop_str = conv.sep if conv.sep_style != SeparatorStyle.TWO else conv.sep2

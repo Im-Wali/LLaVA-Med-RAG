@@ -59,10 +59,6 @@ class LlavaMistralForCausalLM(MistralForCausalLM, LlavaMetaForCausalLM):
         **kwargs,
     ) -> Union[Tuple, CausalLMOutputWithPast]:
         
-        if kwargs:
-            logger.warning_once(f"지금 분기문 탓어!!!!!{kwargs}")
-            
-
         if inputs_embeds is None:
             (
                 input_ids,
