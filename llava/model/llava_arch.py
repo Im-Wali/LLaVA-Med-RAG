@@ -31,7 +31,8 @@ class LlavaMetaModel:
     def __init__(self, config):
         super(LlavaMetaModel, self).__init__(config)
 
-        if hasattr(config, "mm_vision_tower"):
+        self.vision_tower = getattr(config, "mm_vision_tower", None)
+        if self.vision_tower is not None:
             self.vision_tower = build_vision_tower(config, delay_load=True)
             self.mm_projector = build_vision_projector(config)
 
@@ -42,7 +43,8 @@ class LlavaMetaModel:
         return vision_tower
 
     def initialize_vision_modules(self, model_args, fsdp=None, embed_tokens=None):
-        vision_tower = model_args.vision_tower
+        # vision_tower = model_args.vision_tower
+        vision_tower = getattr(model_args, "vision_tower", None) or getattr(self.config, "mm_vision_tower", None)
         mm_vision_select_layer = model_args.mm_vision_select_layer
         mm_vision_select_feature = model_args.mm_vision_select_feature
         pretrain_mm_mlp_adapter = model_args.pretrain_mm_mlp_adapter
