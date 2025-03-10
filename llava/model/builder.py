@@ -8,8 +8,11 @@ def load_pretrained_model(model_path, model_base, model_name, load_8bit=False, l
 
     kwargs = {}
     # kwargs['device_map'] = 'cpu'
+    
     if device != "cuda":
-        kwargs['device_map'] = {"": device}
+        kwargs["device_map"] = {"": device}
+    # else:
+    #     kwargs["device_map"] = {"": "auto"}  # 명시적으로 GPU 설정
 
     if load_8bit:
         kwargs['load_in_8bit'] = True
@@ -31,7 +34,7 @@ def load_pretrained_model(model_path, model_base, model_name, load_8bit=False, l
                 tokenizer = AutoTokenizer.from_pretrained(model_path)
                 model = LlavaMistralForCausalLM.from_pretrained(
                     model_path,
-                    low_cpu_mem_usage=False,
+                    low_cpu_mem_usage=True,
                     use_flash_attention_2=False,
                     **kwargs
                 )
@@ -73,7 +76,10 @@ def load_pretrained_model(model_path, model_base, model_name, load_8bit=False, l
             vision_tower.load_model()
         vision_tower.to(device=device, dtype=torch.float16)
         model.model.mm_projector.to(device=device, dtype=torch.float16)
-        model.to(device=device, dtype=torch.float16)
+        # model.to(device=device, dtype=torch.float16)
+        # 아래 에러시 해당 부분 주석 처리.
+        # ValueError: .to is not supported for 4-bit or 8-bit bitsandbytes models. Please use the model as it is, since the model has already been set to the correct devices and casted to the correct dtype.
+        # model.to(device=device)
         image_processor = vision_tower.image_processor
 
     if hasattr(model.config, "max_sequence_length"):

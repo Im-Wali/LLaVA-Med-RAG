@@ -29,7 +29,8 @@ from torch.utils.data import Dataset
 from llava.train.llava_trainer import LLaVATrainer
 
 from llava import conversation as conversation_lib
-from llava import LlavaLlamaForCausalLM
+# from llava import LlavaLlamaForCausalLM
+from ..model.language_model.llava_mistral import LlavaMistralForCausalLM
 
 from PIL import Image
 import torch.nn as nn
@@ -487,12 +488,14 @@ def train():
     model_args, data_args, training_args = parser.parse_args_into_dataclasses()
 
     if model_args.vision_tower is not None:
-        model = LlavaLlamaForCausalLM.from_pretrained(
+        # model = LlavaLlamaForCausalLM.from_pretrained(
+        model = LlavaMistralForCausalLM.from_pretrained(
             model_args.model_name_or_path,
             cache_dir=training_args.cache_dir,
         )
     else:
-        model = transformers.LlamaForCausalLM.from_pretrained(
+        # model = transformers.LlamaForCausalLM.from_pretrained(
+        model = transformers.LlavaMistralForCausalLM.from_pretrained(
             model_args.model_name_or_path,
             cache_dir=training_args.cache_dir,
         )
