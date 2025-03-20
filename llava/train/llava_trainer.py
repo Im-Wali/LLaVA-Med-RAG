@@ -9,7 +9,7 @@ from transformers.trainer import (
     get_parameter_names,
     has_length,
     ALL_LAYERNORM_LAYERS,
-    ShardedDDPOption,
+    # ShardedDDPOption,
     logger,
 )
 from typing import List, Optional
@@ -147,7 +147,7 @@ class LLaVATrainer(Trainer):
         else:
             return super()._get_train_sampler()
 
-    def create_optimizer(self):
+    def ___create_optimizer(self):
         """
         Setup the optimizer.
 

@@ -123,10 +123,12 @@ class LlavaMistralForCausalLM(MistralForCausalLM, LlavaMetaForCausalLM):
         else:
             inputs_embeds = self.get_model().embed_tokens(inputs)
 
+        print(kwargs)
         return super().generate(
             position_ids=position_ids,
             attention_mask=attention_mask,
             inputs_embeds=inputs_embeds,
+            # sliding_window=1 ,
             **kwargs
         )
 

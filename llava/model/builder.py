@@ -9,6 +9,9 @@ def load_pretrained_model(model_path, model_base, model_name, load_8bit=False, l
     kwargs = {}
     # kwargs['device_map'] = 'cpu'
     
+    print(model_path)
+    print(model_base)
+    print(model_name)
     if device != "cuda":
         kwargs["device_map"] = {"": device}
     # else:

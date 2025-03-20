@@ -29,7 +29,6 @@ import tokenizers
 
 from llava.constants import IGNORE_INDEX, IMAGE_TOKEN_INDEX, DEFAULT_IMAGE_TOKEN, DEFAULT_IM_START_TOKEN, DEFAULT_IM_END_TOKEN
 from torch.utils.data import Dataset
-from llava.train.llava_trainer import LLaVATrainer
 
 from llava import conversation as conversation_lib
 from llava.model import *
@@ -960,12 +959,19 @@ def train(attn_implementation=None):
                     if training_args.bf16 and module.weight.dtype == torch.float32:
                         module = module.to(torch.bfloat16)
 
+    from transformers import Trainer
+    from llava.train.llava_trainer import LLaVATrainer
+
     data_module = make_supervised_data_module(tokenizer=tokenizer,
                                               data_args=data_args)
-    trainer = LLaVATrainer(model=model,
+    trainer = Trainer(model=model,
                     tokenizer=tokenizer,
                     args=training_args,
                     **data_module)
+    # trainer = LLaVATrainer(model=model,`~
+    #                 tokenizer=tokenizer,`
+    #                 args=training_args,
+    #                 **data_module)
 
     if list(pathlib.Path(training_args.output_dir).glob("checkpoint-*")):
         trainer.train(resume_from_checkpoint=True)
