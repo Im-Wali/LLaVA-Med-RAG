@@ -961,6 +961,7 @@ def train(attn_implementation=None):
 
     from transformers import Trainer
     from llava.train.llava_trainer import LLaVATrainer
+    
 
     data_module = make_supervised_data_module(tokenizer=tokenizer,
                                               data_args=data_args)
@@ -968,6 +969,7 @@ def train(attn_implementation=None):
                     tokenizer=tokenizer,
                     args=training_args,
                     **data_module)
+    trainer.args.max_grad_norm = 10.0
     # trainer = LLaVATrainer(model=model,`~
     #                 tokenizer=tokenizer,`
     #                 args=training_args,
