@@ -73,8 +73,9 @@ def eval_model(args):
 
         # 이미지 로드 및 정규화
         image_path_full = os.path.join(args.image_folder, image_path, image_file)
-        image = Image.open(image_path_full).convert("RGB")
-        image = normalize_image(image, max_size=512, pad_square=True)  # 크기 조정 + 정사각형 패딩
+        image = Image.open(image_path_full)
+        # image = Image.open(image_path_full).convert("RGB")
+        # image = normalize_image(image, max_size=512, pad_square=True)  # 크기 조정 + 정사각형 패딩
         image_tensor = process_images([image], image_processor, model.config)[0]
 
         stop_str = conv.sep if conv.sep_style != SeparatorStyle.TWO else conv.sep2
