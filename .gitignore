@@ -1,0 +1,6 @@
+__pycache__
+*.pyc
+*.egg-info
+data/mimic_cxr_annotaion_json/chat_train_MIMIC_CXR_all_gpt4extract_rulebased_v1_1-2-3.json
+wandb/
+checkpoints/

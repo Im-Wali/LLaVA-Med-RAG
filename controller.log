@@ -1,0 +1,15 @@
+2025-03-26 16:01:16 | INFO | controller | args: Namespace(host='0.0.0.0', port=10000, dispatch_method='shortest_queue')
+2025-03-26 16:01:16 | INFO | controller | Init controller
+2025-03-26 16:01:17 | ERROR | stderr | [32mINFO[0m:     Started server process [[36m12681[0m]
+2025-03-26 16:01:17 | ERROR | stderr | [32mINFO[0m:     Waiting for application startup.
+2025-03-26 16:01:17 | ERROR | stderr | [32mINFO[0m:     Application startup complete.
+2025-03-26 16:01:17 | ERROR | stderr | [32mINFO[0m:     Uvicorn running on [1mhttp://0.0.0.0:10000[0m (Press CTRL+C to quit)
+2025-03-26 16:01:22 | ERROR | stderr | [32mINFO[0m:     Shutting down
+2025-03-26 16:01:22 | ERROR | stderr | [32mINFO[0m:     Waiting for application shutdown.
+2025-03-26 16:01:22 | ERROR | stderr | [32mINFO[0m:     Application shutdown complete.
+2025-03-26 16:01:22 | ERROR | stderr | [32mINFO[0m:     Finished server process [[36m12681[0m]
+2025-03-26 16:01:22 | ERROR | stderr | Exception ignored in: <module 'threading' from '/usr/lib/python3.10/threading.py'>
+2025-03-26 16:01:22 | ERROR | stderr | Traceback (most recent call last):
+2025-03-26 16:01:22 | ERROR | stderr |   File "/usr/lib/python3.10/threading.py", line 1567, in _shutdown
+2025-03-26 16:01:22 | ERROR | stderr |     lock.acquire()
+2025-03-26 16:01:22 | ERROR | stderr | KeyboardInterrupt:

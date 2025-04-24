@@ -1,0 +1,13 @@
+{
+    "BLEU": 0.025911202522638836,
+    "ROUGE-L": 0.17073021031093075,
+    "METEOR": 5.515630601131453,
+    "Soft Exact Match (Jaccard >= 0.85)": 0.0,
+    "F1 Score": 0.0,
+    "Precision": 0.0,
+    "Recall": 0.0,
+    "BERTScore_F1": -0.1969563215970993,
+    "MedEntity_Precision": 0.11115867579908674,
+    "MedEntity_Recall": 0.09238013698630136,
+    "MedEntity_F1": 0.091764514024788
+}
